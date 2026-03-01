@@ -1,0 +1,23 @@
+{
+  "name": "learning-advanced-programming-in-web-technology-spring_25-26",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sawhardoSikto/learning-Advanced-Programming-in-Web-Technology-Spring_25-26.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sawhardoSikto/learning-Advanced-Programming-in-Web-Technology-Spring_25-26/issues"
+  },
+  "homepage": "https://github.com/sawhardoSikto/learning-Advanced-Programming-in-Web-Technology-Spring_25-26#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

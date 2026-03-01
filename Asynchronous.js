@@ -42,9 +42,69 @@ function certificate()
     },2000);
 }
 
-enroll(function(){
-    progess(certificate);
-});
+// enroll(function(){
+//     progess(certificate);
+// });
 
 
 //promise example
+function enroll1()
+{
+    console.log("Course enrollment is in progress...");
+    let promise = new Promise(function(resolve, reject)
+        {
+            setTimeout(() => {
+                if(paymentSuccess)
+                {
+                    resolve();
+                }
+                else
+                {
+                    reject("Payment failed. Enrollment unsuccessful.");
+                }
+                
+            }, 2000);
+        });
+        return promise;
+}
+function progess1()
+{
+        console.log("Course is in progress...");
+    let promise = new Promise(function(resolve, reject)
+    {
+        setTimeout(() => {
+            if(marks >= 80)
+            {
+                resolve();
+            }
+            else
+            {
+                reject("Course not completed. You scored " + marks);
+            }
+        }, 2000);
+    });
+    return promise;
+}
+function certificate1()
+{
+    console.log("Generating certificate...");
+    let promise = new Promise(function()
+    {
+        setTimeout(() => {
+            
+            console.log("Certificate generated successfully.");
+        }, 2000);
+        
+    });
+    return promise;
+}
+
+enroll1()
+.then(progess1)
+.then(certificate1)
+.then(function(message){
+    console.log(message);
+})
+.catch(function(error){
+    console.log(error);
+});
