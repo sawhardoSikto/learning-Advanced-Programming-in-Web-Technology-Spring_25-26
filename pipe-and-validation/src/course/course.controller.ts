@@ -1,6 +1,7 @@
 import { Controller ,Get,Post,Put,Patch, Param,Delete,Body } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CreateUserDto } from './DTOs/CreateCourse.dto';
+import { UpdateCourseDto } from './DTOs/UpdateCourse.dto';
 
 
 @Controller('course')
@@ -18,12 +19,16 @@ export class CourseController {
 
     @Post()
     createCourse(@Body() createUserDto: CreateUserDto) {
-        return `Create Course - from Controller with data: ${JSON.stringify(createUserDto)}`;
+       return this.courseService.createCourse(createUserDto);
     }
 
     @Put(':id')
-    updateCourse(@Param('id') id: string) {
-        return this.courseService.updateCourse(id);
+    updateCourse(@Param('id') id: string , @Body() dto: UpdateCourseDto) {
+        return this.courseService.updateCourse(id, dto);
+    }
+    @Patch(':id')
+    patchCourse(@Param('id') id: string, @Body() dto: UpdateCourseDto) {
+        return this.courseService.patchCourse(id, dto);
     }
 
     @Delete(':id')
