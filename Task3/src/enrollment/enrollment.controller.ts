@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post,Body } from '@nestjs/common';
 import { EnrollmentService } from './enrollment.service';
 import { CreateEnrollmentDto } from './DTOs/CreateEnrollment.dto';
 
@@ -6,12 +6,12 @@ import { CreateEnrollmentDto } from './DTOs/CreateEnrollment.dto';
 export class EnrollmentController {
     constructor(private enrollmentService: EnrollmentService){}
     
-    @Get
+    @Get()
     getEnrollment()
     {
        return this.enrollmentService.getEnrollment();
     }
-    @Post
+    @Post()
     createEnrollment(@Body() dto:CreateEnrollmentDto)
     {
         return this.enrollmentService.enrollmentStudent(dto)
