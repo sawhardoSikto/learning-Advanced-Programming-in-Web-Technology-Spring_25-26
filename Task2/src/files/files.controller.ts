@@ -24,16 +24,17 @@ export class FilesController {
           cb(null, filename);
         },
       }),
-      fileFilter: (req, file, cb) => {
-        if (file.originalname.match(/^.*\.(jpg|jpeg|pdf)$/)) {
-          cb(null, true);
-        } else {
-          cb(
-            new BadRequestException('only image files and pdf  are accepted'),
-            false,
-          );
-        }
-      },
+fileFilter:(req,file,cb)=>{
+ if(
+  file.mimetype === 'image/jpeg' ||
+  file.mimetype === 'image/png' ||
+  file.mimetype === 'application/pdf'
+ ){
+  cb(null,true)
+ }else{
+  cb(new Error('Only jpg png pdf allowed'),false)
+ }
+},
 
       limits: {
         fileSize: 3 * 1024 * 1024,
