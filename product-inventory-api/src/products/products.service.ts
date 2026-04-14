@@ -47,7 +47,11 @@ export class ProductsService {
         }
         else {
             const updateUser = this.ProductRepository.merge(product, partialProduct);
-            return this.ProductRepository.save(updateUser);
+             const savedProduct = await this.ProductRepository.save(updateUser);
+             return {
+                message: 'Product updated successfully',
+                data: savedProduct
+            };
         }
     }
     async replace(id: number, updateProductDto: UpdateProductDto) {
@@ -81,17 +85,27 @@ export class ProductsService {
 
     }
     async search(keyword: string) {
-  const products = await this.ProductRepository.find({
-    where: {
-      name: Like(`%${keyword}%`)as any
-    }
-  });
+        const products = await this.ProductRepository.find({
+            where: {
+                name: Like(`%${keyword}%`) as any
+            }
+        });
 
-  return {
-    message: 'Search results',
-    count: products.length,
-    data: products
-  };
-}
+        return {
+            message: 'Search results',
+            count: products.length,
+            data: products
+        };
+    }
+    async toggleActive(id: number) {
+        const product = await this.ProductRepository.findOne({ where: { id } });    
+        if (!product) {
+            throw new BadRequestException('Product not found');
+        }   
+        product.isActive = !product.isActive;
+        const savedProduct = await this.ProductRepository.save(product);
+        return { message: 'Product status updated', data: savedProduct };
+    }
+
 }
 
